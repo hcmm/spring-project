@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<bean id="fonteDadosEstatico" class="br.com.factory.FactoryFonteDados"
+		factory-method="criarEstatico">
+		<constructor-arg index="0" value="arquivo" />
+	</bean>
+
+	<bean id="factory" class="br.com.factory.FactoryFonteDados" />
+
+	<bean id="FonteDadosInstancia" factory-bean="factory"
+		factory-method="criar">
+		<constructor-arg index="0" value="randomico" />
+	</bean>
+
+	<bean id="fonteDadosArquivo" factory-bean="factory"
+	factory-method="criar">
+	<property name="arquivo" value="/caminho/para/arquivo" />
+	</bean>
+
+	<bean name="fonteDadosMapa" class="br.com.casadocodigo.FonteDadosMapaArquivos">
+		<property name="mapa">
+			<map>
+				<entry key="arquivo">
+					<ref bean="arquivo" />
+				</entry>
+				<entry key="arquivoString" value="/caminho/para/arquivo.csv" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="fonteDados" class="br.com.io.FonteDadosArquivo">
+		 <property name="arquivo" value="/arquivos/pessoas.csv" />
+		<property name="arquivo">
+			<list>
+				<bean class="java.io.File">
+					<constructor-arg value="/caminho/para/arquivo1" />
+				</bean>
+				<bean class="java.io.File">
+					<constructor-arg value="/caminho/para/arquivo2" />
+				</bean>
+				<bean class="java.io.File">
+					<constructor-arg value="/caminho/para/arquivo3" />
+				</bean>
+				<ref bean="impressor" />
+			</list>
+		</property>
+	</bean>

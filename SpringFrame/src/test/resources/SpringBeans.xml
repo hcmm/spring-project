@@ -1,0 +1,51 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<import resource="springTeste.xml" />
+
+	<bean id="fonteDados" class="br.com.io.FonteDadosArquivo"
+		lazy-init="true" init-method="init" scope="prototype">
+		<property name="arquivo" value="/arquivos/pessoas.csv" />
+	</bean>
+
+	<bean id="impressor" class="br.com.core.ImpressorImpl" lazy-init="true"
+		destroy-method="cleanup" />
+
+	<bean id="processador" class="br.com.core.Processador" scope="singleton">
+		<property name="fonteDados" ref="fonteDados" />
+		<!-- <property name="impressor" ref="impressor"/> -->
+		<!-- <constructor-arg ref="fonteDados" /> -->
+		<!-- <constructor-arg ref="impressor" /> -->
+	</bean>
+
+	<bean id="processadorFilho" parent="processador">
+		<property name="fonteDados" ref="fonteDadosRandomico" />
+	</bean>
+
+	<bean id="fonteDadosArquivos" parent="processador">
+		<property name="maxNumArquivos" value="#{5 * 3}" />
+		<property name="maxNumArquivos2" value="#{5 > 4 ? 5 : 3}" />
+	</bean>
+
+	<bean id="fonteDadosListaArquivos" class="br.com.casadocodigo.FonteDadosListaArquivos">
+		<property name="arquivos">
+			<list>
+				<bean class="java.io.File">
+					<constructor-arg value="/opt/arquivos/arquivo1.csv" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="fonteDadosArquivosCopia" parent="processador">
+		<property name="arquivos" value="#{fonteDadosListaArquivos.arquivos}" />
+		<property name="numMaximoArquivos" value="#{fonteDadosListaArquivos.arquivos?.size()}" />
+	</bean>
+
+	<bean id="fonteDadosArquivoUsuario" class="br.com.casadocodigo.FonteDadosArquivo">
+		<property name="arquivo" value="#{systemProperties['user.home']}/arquivo.csv" />
+	</bean>
+
+</beans>
