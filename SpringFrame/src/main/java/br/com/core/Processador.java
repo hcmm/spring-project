@@ -83,6 +83,7 @@ public class Processador implements Impressor, FonteDados, BeanFactoryAware{
 	public DAOUsuario getDaoUsuario() {
 		return daoUsuario;
 	}
+	
 	@Autowired
 	public void setDaoUsuario(DAOUsuario daoUsuario) {
 		this.daoUsuario = daoUsuario;

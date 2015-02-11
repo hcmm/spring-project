@@ -9,12 +9,24 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<!-- O Spring gerencia as dependencias de forma implicita -->
 	<context:annotation-config />
 	<!-- Procura injecao por anotacao no classpath do projeto -->
-	<context:component-scan base-package="br.com"/>
+	<context:component-scan base-package="br.com.dao">
+
+		<!-- Inclui todos os componentes cujo nome da classe comece com DAO 82 
+			E-book gerado especialmente para Felipe C N Machado - fcnmachado@gmail.com 
+			Casa do Código Capítulo 4. Minimizando o XML com autowiring, anotações e 
+			Java -->
+		<context:include-filter type="regex" expression="DAO*" />
+		
+		<!-- Exclui todos os componentes do estereótipo Controller -->
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
 
 
-<!-- 	<bean class="br.com.resources.DataSource"> -->
-<!-- 		<property name="connectionString" value="jdbc:mysql://localhost/db" /> -->
-<!-- 	</bean> -->
+	<!-- <bean class="br.com.resources.DataSource"> -->
+	<!-- <property name="connectionString" value="jdbc:mysql://localhost/db" 
+		/> -->
+	<!-- </bean> -->
 
 	<!-- <bean id="dataSourceUsuarios" class="br.com.resources.DataSource" autowire-candidate="false"> -->
 	<!-- <property name="connectionString" value="jdbc:mysql://localhost/users" 
@@ -25,17 +37,18 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<!-- <property name="dataSource" ref="dataSourceUsuarios" /> -->
 	<!-- </bean> -->
 
-<!-- 	<bean class="br.com.dao.DAOProduto" /> -->
-<!-- 	<bean class="br.com.dao.DAOUsuario" /> -->
-<!-- 	<bean class="br.com.dao.DAOVenda" /> -->
-<!-- 	<bean class="br.com.dao.Processador" /> -->
+	<!-- <bean class="br.com.dao.DAOProduto" /> -->
+	<!-- <bean class="br.com.dao.DAOUsuario" /> -->
+	<!-- <bean class="br.com.dao.DAOVenda" /> -->
+	<!-- <bean class="br.com.dao.Processador" /> -->
 
 
-<!-- 	<bean id="dataSource" class="br.com.resources.DataSource"> -->
-<!-- 		<property name="connectionString" value="jdbc:mysql://localhost/db" /> -->
-<!-- 	</bean> -->
-<!-- 	<bean id="daoProduto" class="br.com.dao.DAOProduto" /> -->
-<!-- 	<bean id="daoUsuario" class="br.com.dao.DAOUsuario" /> -->
-<!-- 	<bean id="daoVenda" class="br.com.dao.DAOVenda" /> -->
-<!-- 	<bean id="processador" class="br.com.dao.Processador" /> -->
+	<!-- <bean id="dataSource" class="br.com.resources.DataSource"> -->
+	<!-- <property name="connectionString" value="jdbc:mysql://localhost/db" 
+		/> -->
+	<!-- </bean> -->
+	<!-- <bean id="daoProduto" class="br.com.dao.DAOProduto" /> -->
+	<!-- <bean id="daoUsuario" class="br.com.dao.DAOUsuario" /> -->
+	<!-- <bean id="daoVenda" class="br.com.dao.DAOVenda" /> -->
+	<!-- <bean id="processador" class="br.com.dao.Processador" /> -->
 </beans>
