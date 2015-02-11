@@ -1,0 +1,28 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="dataSource" class="br.com.resources.DataSource">
+		<property name="connectionString" value="jdbc:mysql://localhost/db" />
+	</bean>
+
+	<bean id="daoProduto" class="br.com.dao.DAOProduto">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="daoUsuario" class="br.com.dao.DAOUsuario">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="daoVenda" class="br.com.dao.DAOVenda">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="processador" class="br.com.core.Processador">
+		<property name="daoProduto" ref="daoProduto" />
+		<property name="daoUsuario" ref="daoUsuario" />
+		<property name="daoVenda" ref="daoVenda" />
+	</bean>
+
+</beans>
