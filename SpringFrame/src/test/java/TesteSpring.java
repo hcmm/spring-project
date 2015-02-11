@@ -19,7 +19,6 @@ public class TesteSpring {
 		assertTrue(processador1!=processador2);
 	}
 	
-	
 	@Test
 	public void testaCarregamentoDeModulos(){
 //		context =  new ({"spring-daos.xml", "spring-relatorios.xml", "spring-processamento.xml"});
