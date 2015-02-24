@@ -1,0 +1,28 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="daoPessoasTarget" class="br.com.dao.DAOPessoas" />
+
+	<bean id="aroundProfilador" class="br.com.advices.AdviceAroundProfilador" />
+
+	
+	<bean id="beforeProfilador" class="br.com.advices.AdviceBeforeProfilador" />
+
+	<!-- Advice do tipo after throws -->
+	<bean id="afterThrows" class="br.com.advices.AdviceAfterThrows" />
+
+	<bean id="daoPessoas" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="daoPessoasTarget" />
+		<property name="interceptorNames">
+			<list>
+				<value>aroundProfilador</value>
+				
+				<value>beforeProfilador</value>
+				
+				<value>afterThrows</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>
