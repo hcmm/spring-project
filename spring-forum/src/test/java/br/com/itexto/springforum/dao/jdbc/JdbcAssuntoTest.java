@@ -21,8 +21,8 @@ public class JdbcAssuntoTest {
 		DriverManagerDataSource ds = new DriverManagerDataSource();
 		ds.setDriverClassName("com.mysql.jdbc.Driver");
 		ds.setUrl("jdbc:mysql://localhost:3306/spring_forum");
-		ds.setUsername("sf");
-		ds.setPassword("sf");
+		ds.setUsername("root");
+		ds.setPassword("");
 		jdbcAssunto.setJdbcTemplate(new JdbcTemplate(ds));
 	}
 	
